@@ -87,7 +87,7 @@ jobs:
 
   ios:
     name: iOS
-    runs-on: macos-15-arm64
+    runs-on: macos-15
     steps:
       - uses: actions/checkout@v4
       - name: Xcode を選択
