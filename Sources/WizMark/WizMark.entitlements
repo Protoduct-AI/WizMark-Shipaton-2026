@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.developer.applesignin</key>
+	<array>
+		<string>Default</string>
+	</array>
+	<key>aps-environment</key>
+	<string>$(APS_ENVIRONMENT)</string>
+	<key>com.apple.developer.associated-domains</key>
+	<array>
+		<string>applinks:wizmark.protoductai.com</string>
+	</array>
+	<key>com.apple.developer.icloud-container-environment</key>
+	<string>$(ICLOUD_ENVIRONMENT)</string>
+	<key>com.apple.developer.icloud-container-identifiers</key>
+	<array>
+		<string>iCloud.com.protoductai.wizmark</string>
+	</array>
+	<key>com.apple.developer.icloud-services</key>
+	<array>
+		<string>CloudKit</string>
+	</array>
+	<key>com.apple.developer.ubiquity-kvstore-identifier</key>
+	<string>$(TeamIdentifierPrefix)com.protoductai.wizmark</string>
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>group.com.protoductai.wizmark</string>
+	</array>
+</dict>
+</plist>

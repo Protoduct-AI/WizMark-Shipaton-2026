@@ -1,0 +1,58 @@
+# WizMark のデモ録画用フロー。
+#
+#   make demo-prepare     状態を作る（初回・撮り直しのたび）
+#   make demo             フローを流す
+#   make demo-record      録画しながら流す
+#
+# 保存したものを見返し、AI が付けた情報を確認し、共有まで通す。実際の
+# 利用順に並べてあるので、そのまま「使い方」として読める。
+#
+# 状態づくりは demo-prepare（simctl の起動引数）に任せ、ここでは
+# 起動済みのアプリを操作するだけにしている。Maestro の launchApp では
+# 起動引数が期待どおり渡らなかったため。Pro とデモデータの指定は
+# アプリ側で記憶されるので、ここで再起動しても失われない。
+#
+# 画面を戻るのに stopApp/launchApp を使っているのは、back もエッジ
+# スワイプも詳細画面では効かず、ナビゲーションバーの「戻る」を
+# テキストで引くと親画面のタイトルに一致してしまったため。起動し直す
+# ほうが速く、確実で、読んでも意図がわかる。
+appId: com.protoductai.wizmark
+---
+# ── ① ためたものがひと目でわかる ──────────────────────────────────
+- launchApp
+- runFlow:
+    when:
+      visible: "アプリにトラッキングしないように要求"
+    commands:
+      - tapOn: "アプリにトラッキングしないように要求"
+- assertVisible: "すべてのブックマーク"
+- assertVisible: "行きたいカフェ"
+- takeScreenshot: build/demo/01-home
+
+# ── ② コレクションを開くと、保存したものが並ぶ ────────────────────
+- tapOn: "行きたいカフェ"
+- assertVisible: "焙煎室のある喫茶 琥珀"
+- takeScreenshot: build/demo/02-collection
+
+# ── ③ 保存しただけで、AI が要約・タグ・店舗情報を付けている ────────
+- tapOn: "焙煎室のある喫茶 琥珀"
+- assertVisible: "AI 要約"
+- takeScreenshot: build/demo/03-ai-detail
+
+# ── ④ レシピは材料と手順まで取り出す ──────────────────────────────
+- stopApp
+- launchApp
+- tapOn: "作りたいレシピ"
+- tapOn: "30分でできる基本のトマトパスタ"
+- assertVisible: "AI 要約"
+- takeScreenshot: build/demo/04-recipe
+
+# ── ⑤ 共有されたコレクションは、相手の端末でそのまま読める ─────────
+- stopApp
+- launchApp
+- runFlow:
+    when:
+      visible: "共有されたコレクション"
+    commands:
+      - tapOn: "テック"
+      - takeScreenshot: build/demo/05-shared

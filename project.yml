@@ -1,0 +1,317 @@
+name: WizMark
+
+options:
+  bundleIdPrefix: com.protoductai
+  deploymentTarget:
+    iOS: "17.0"
+  xcodeVersion: "16.0"
+  generateEmptyDirectories: true
+
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    DEVELOPMENT_TEAM: UJTZMJ5D9Q
+    ENABLE_USER_SCRIPT_SANDBOXING: false
+
+packages:
+  ConvexMobile:
+    url: https://github.com/get-convex/convex-swift
+    from: "0.8.0"
+  ClerkKit:
+    url: https://github.com/clerk/clerk-ios
+    from: "1.0.0"
+  ClerkConvexSwift:
+    url: https://github.com/clerk/clerk-convex-swift
+    from: "0.1.0"
+  RevenueCat:
+    url: https://github.com/RevenueCat/purchases-ios
+    from: "5.0.0"
+  PostHog:
+    url: https://github.com/PostHog/posthog-ios
+    from: "3.0.0"
+  Sentry:
+    url: https://github.com/getsentry/sentry-cocoa
+    from: "8.0.0"
+  RichTextKit:
+    url: https://github.com/danielsaidi/RichTextKit
+    from: "1.0.0"
+  GoogleMobileAds:
+    url: https://github.com/googleads/swift-package-manager-google-mobile-ads
+    from: "11.0.0"
+  Humation:
+    url: https://github.com/humation-labs/humation-swift
+    revision: 27d86bb37e2e61b1013882fe3234742f54eec8b1
+
+targets:
+  WizMark:
+    type: application
+    platform: iOS
+    sources:
+      - Sources/WizMark
+    configFiles:
+      Debug: Config/Debug.xcconfig
+      Release: Config/Release.xcconfig
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.protoductai.wizmark
+        MARKETING_VERSION: "1.2.0"
+        CURRENT_PROJECT_VERSION: "24"
+        INFOPLIST_KEY_CFBundleDisplayName: WizMark
+        INFOPLIST_KEY_LSApplicationCategoryType: "public.app-category.utilities"
+        SWIFT_EMIT_LOC_STRINGS: "YES"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_PREVIEWS: "YES"
+      configs:
+        Debug:
+          APS_ENVIRONMENT: development
+          # Debug builds must target the CloudKit Development environment.
+          # CloudKit only auto-creates the schema there; Production never does.
+          # Pointing debug builds at Production meant the schema was never
+          # generated in either environment and sync could not initialize.
+          ICLOUD_ENVIRONMENT: Development
+        Release:
+          APS_ENVIRONMENT: production
+          ICLOUD_ENVIRONMENT: Production
+          CODE_SIGN_STYLE: Manual
+          CODE_SIGN_IDENTITY: "Apple Distribution: PROTODUCTAI K.K. (UJTZMJ5D9Q)"
+          PROVISIONING_PROFILE_SPECIFIER: "WizMark AppStore V2"
+    dependencies:
+      - package: ConvexMobile
+      - package: ClerkKit
+      - package: ClerkKit
+        product: ClerkKitUI
+      - package: ClerkConvexSwift
+        product: ClerkConvex
+      - package: RevenueCat
+        product: RevenueCat
+      - package: PostHog
+      - package: Sentry
+        product: Sentry
+      - package: RichTextKit
+      - package: GoogleMobileAds
+        product: GoogleMobileAds
+      - package: Humation
+      - target: WizMarkShare
+        embed: true
+        codeSign: true
+    info:
+      path: Sources/WizMark/Info.plist
+      properties:
+        CFBundleDisplayName: WizMark
+        CFBundleIconName: AppIcon
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        CFBundleURLTypes:
+          - CFBundleURLSchemes:
+              - wizmark
+            CFBundleURLName: "$(PRODUCT_BUNDLE_IDENTIFIER)"
+        CFBundleDocumentTypes:
+          - CFBundleTypeName: "WizMark Collection"
+            CFBundleTypeRole: Viewer
+            LSHandlerRank: Owner
+            LSItemContentTypes:
+              - com.protoductai.wizmark
+        UTExportedTypeDeclarations:
+          - UTTypeIdentifier: com.protoductai.wizmark
+            UTTypeDescription: "WizMark Collection"
+            UTTypeConformsTo:
+              - public.json
+            UTTypeTagSpecification:
+              public.filename-extension:
+                - wizmark
+        NSFaceIDUsageDescription: "Face IDで安全にログインできます"
+        NSCameraUsageDescription: "プロフィール画像を設定するために写真ライブラリへのアクセスが必要です"
+        NSPhotoLibraryUsageDescription: "プロフィール画像を設定するために写真ライブラリへのアクセスが必要です"
+        NSUserTrackingUsageDescription: "パーソナライズされた広告を表示するために使用されます。"
+        UIBackgroundModes:
+          - remote-notification
+        UILaunchScreen: {}
+        UIAppFonts:
+          - BlackOpsOne.ttf
+        LSSupportsOpeningDocumentsInPlace: true
+        # canOpenURL は宣言のないスキームに常に false を返すため、
+        # Google マップがインストール済みかの判定に必要。
+        LSApplicationQueriesSchemes:
+          - comgooglemaps
+        CONVEX_URL: "$(CONVEX_URL)"
+        CLERK_PUBLISHABLE_KEY: "$(CLERK_PUBLISHABLE_KEY)"
+        REVENUECAT_API_KEY: "$(REVENUECAT_API_KEY)"
+        POSTHOG_API_KEY: "$(POSTHOG_API_KEY)"
+        POSTHOG_HOST: "$(POSTHOG_HOST)"
+        SENTRY_DSN: "$(SENTRY_DSN)"
+        GADApplicationIdentifier: "ca-app-pub-7370584857233870~8345122355"
+        ITSAppUsesNonExemptEncryption: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        SKAdNetworkItems:
+          - SKAdNetworkIdentifier: cstr6suwn9.skadnetwork
+          - SKAdNetworkIdentifier: 4fzdc2evr5.skadnetwork
+          - SKAdNetworkIdentifier: 4pfyvq9l8r.skadnetwork
+          - SKAdNetworkIdentifier: 2fnua5tdw4.skadnetwork
+          - SKAdNetworkIdentifier: ydx93a7ass.skadnetwork
+          - SKAdNetworkIdentifier: 5a6flpkh64.skadnetwork
+          - SKAdNetworkIdentifier: p78ahlhdf7.skadnetwork
+          - SKAdNetworkIdentifier: v72qych5uu.skadnetwork
+          - SKAdNetworkIdentifier: ludvb6z3bs.skadnetwork
+          - SKAdNetworkIdentifier: cp8zw746q7.skadnetwork
+          - SKAdNetworkIdentifier: 3sh42y64q3.skadnetwork
+          - SKAdNetworkIdentifier: c6k4g5qg8m.skadnetwork
+          - SKAdNetworkIdentifier: s39g8k73mm.skadnetwork
+          - SKAdNetworkIdentifier: 3qy4746246.skadnetwork
+          - SKAdNetworkIdentifier: f38h382jlk.skadnetwork
+          - SKAdNetworkIdentifier: hs6bdukanm.skadnetwork
+          - SKAdNetworkIdentifier: prcb7njmu6.skadnetwork
+          - SKAdNetworkIdentifier: v4nxqhlyqp.skadnetwork
+          - SKAdNetworkIdentifier: wzmmz9fp6w.skadnetwork
+          - SKAdNetworkIdentifier: yclnxrl5pm.skadnetwork
+          - SKAdNetworkIdentifier: t38b2kh725.skadnetwork
+          - SKAdNetworkIdentifier: 7ug5zh24hu.skadnetwork
+          - SKAdNetworkIdentifier: 9rd848q77k.skadnetwork
+          - SKAdNetworkIdentifier: y5ghdn5j9k.skadnetwork
+          - SKAdNetworkIdentifier: n6fk4nfna4.skadnetwork
+          - SKAdNetworkIdentifier: v9wttpbfk9.skadnetwork
+          - SKAdNetworkIdentifier: n38lu8286q.skadnetwork
+          - SKAdNetworkIdentifier: 47vhws6wlr.skadnetwork
+          - SKAdNetworkIdentifier: kbd757ywx3.skadnetwork
+          - SKAdNetworkIdentifier: 9t245vhmpl.skadnetwork
+          - SKAdNetworkIdentifier: a2p9lx4jpn.skadnetwork
+          - SKAdNetworkIdentifier: 22mmun2rn5.skadnetwork
+          - SKAdNetworkIdentifier: 4468km3ulz.skadnetwork
+          - SKAdNetworkIdentifier: 2u9pt9hc89.skadnetwork
+          - SKAdNetworkIdentifier: 8s468mfl3y.skadnetwork
+          - SKAdNetworkIdentifier: klf5c3l5u5.skadnetwork
+          - SKAdNetworkIdentifier: ppxm28t8ap.skadnetwork
+          - SKAdNetworkIdentifier: ecpz2srf59.skadnetwork
+          - SKAdNetworkIdentifier: uw77j35x4d.skadnetwork
+          - SKAdNetworkIdentifier: mlmmfzh3r3.skadnetwork
+          - SKAdNetworkIdentifier: 578prtvx9j.skadnetwork
+          - SKAdNetworkIdentifier: 4dzt52r2t5.skadnetwork
+          - SKAdNetworkIdentifier: gta9lk7p23.skadnetwork
+          - SKAdNetworkIdentifier: e5fvkxwrpn.skadnetwork
+          - SKAdNetworkIdentifier: 8c4e2ghe7u.skadnetwork
+          - SKAdNetworkIdentifier: zq492l623r.skadnetwork
+          - SKAdNetworkIdentifier: 3rd42ekr43.skadnetwork
+          - SKAdNetworkIdentifier: 3qcr597p9d.skadnetwork
+    entitlements:
+      path: Sources/WizMark/WizMark.entitlements
+      properties:
+        # Sign in with Apple. Without this the button renders but does nothing,
+        # which is what App Review rejected 1.0 for. It was fixed on a branch
+        # that never reached main, so the fix has been absent ever since.
+        com.apple.developer.applesignin:
+          - Default
+        com.apple.developer.associated-domains:
+          - "applinks:wizmark.protoductai.com"
+        aps-environment: "$(APS_ENVIRONMENT)"
+        com.apple.developer.icloud-container-identifiers:
+          - "iCloud.com.protoductai.wizmark"
+        com.apple.developer.icloud-services:
+          - CloudKit
+        com.apple.developer.icloud-container-environment: "$(ICLOUD_ENVIRONMENT)"
+        com.apple.developer.ubiquity-kvstore-identifier: "$(TeamIdentifierPrefix)com.protoductai.wizmark"
+        com.apple.security.application-groups:
+          - "group.com.protoductai.wizmark"
+
+  WizMarkShare:
+    type: app-extension
+    platform: iOS
+    sources:
+      - Sources/WizMarkShare
+      - path: Sources/WizMark/App
+        includes:
+          - "AppGroup.swift"
+      - path: Sources/WizMark/Models
+        includes:
+          - "Bookmark.swift"
+          - "Collection.swift"
+          # Bookmark が参照するため、拡張側にも必要。
+          - "ExtractedPlace.swift"
+      - path: Sources/WizMark/Services
+        includes:
+          - "OGPFetcher.swift"
+      - path: Sources/WizMark/Resources
+        includes:
+          - "Localizable.xcstrings"
+    configFiles:
+      Debug: Config/Debug.xcconfig
+      Release: Config/Release.xcconfig
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.protoductai.wizmark.share
+        DEVELOPMENT_TEAM: UJTZMJ5D9Q
+        GENERATE_INFOPLIST_FILE: "NO"
+        SWIFT_EMIT_LOC_STRINGS: "YES"
+        MARKETING_VERSION: "1.2.0"
+        CURRENT_PROJECT_VERSION: "24"
+        CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION: "YES"
+      configs:
+        Debug:
+          # Must match the host app, or the extension writes to a different
+          # CloudKit environment than the app it shares a store with.
+          ICLOUD_ENVIRONMENT: Development
+        Release:
+          ICLOUD_ENVIRONMENT: Production
+          CODE_SIGN_STYLE: Manual
+          CODE_SIGN_IDENTITY: "Apple Distribution: PROTODUCTAI K.K. (UJTZMJ5D9Q)"
+          PROVISIONING_PROFILE_SPECIFIER: "WizMarkShare AppStore V2"
+    info:
+      path: Sources/WizMarkShare/Info.plist
+      properties:
+        CFBundleDisplayName: WizMarkShare
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
+        NSExtension:
+          NSExtensionAttributes:
+            NSExtensionActivationRule:
+              NSExtensionActivationSupportsWebURLWithMaxCount: 1
+              NSExtensionActivationSupportsText: true
+          NSExtensionPointIdentifier: com.apple.share-services
+          NSExtensionPrincipalClass: "$(PRODUCT_MODULE_NAME).ShareViewController"
+    entitlements:
+      path: Sources/WizMarkShare/WizMarkShare.entitlements
+      properties:
+        com.apple.developer.icloud-container-environment: "$(ICLOUD_ENVIRONMENT)"
+        com.apple.developer.icloud-container-identifiers:
+          - "iCloud.com.protoductai.wizmark"
+        com.apple.developer.icloud-services:
+          - CloudKit
+        com.apple.security.application-groups:
+          - "group.com.protoductai.wizmark"
+
+  WizMarkTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - Sources/WizMarkTests
+    dependencies:
+      - target: WizMark
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.protoductai.wizmark.tests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  WizMark:
+    build:
+      targets:
+        WizMark: all
+        WizMarkShare: all
+        WizMarkTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - WizMarkTests
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release

@@ -1,0 +1,5 @@
+# Universal Links の AASA を確実に静的ファイルとして返す（SPA フォールバックより優先）
+/.well-known/*  /.well-known/:splat  200
+
+# SPA ルーティング用フォールバック
+/*  /index.html  200

@@ -1,0 +1,23 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": [
+          "UJTZMJ5D9Q.com.protoductai.wizmark"
+        ],
+        "components": [
+          {
+            "/": "/*",
+            "comment": "WizMark universal links"
+          }
+        ]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "UJTZMJ5D9Q.com.protoductai.wizmark"
+    ]
+  }
+}

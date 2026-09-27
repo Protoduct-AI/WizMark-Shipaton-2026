@@ -1,0 +1,136 @@
+{
+  "identifier" : "com.protoductai.wizmark",
+  "nonRenewableSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "6.99",
+      "familyShareable" : false,
+      "internalID" : "wizmark_ad_free",
+      "localizations" : [
+        {
+          "description" : "一度の購入で広告を永久に非表示にします",
+          "displayName" : "広告非表示",
+          "locale" : "ja"
+        },
+        {
+          "description" : "Remove all ads permanently",
+          "displayName" : "Remove Ads",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "wizmark_ad_free",
+      "referenceName" : "Ad Free",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6784499093",
+    "_developerTeamID" : "UJTZMJ5D9Q",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 0,
+    "_locale" : "ja",
+    "_storefront" : "JPN",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "cycleCount"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "wizmark_pro_group",
+      "localizations" : [
+        {
+          "description" : "WizMark Pro サブスクリプション",
+          "displayName" : "WizMark Pro",
+          "locale" : "ja"
+        }
+      ],
+      "name" : "WizMark Pro",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "9.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "wizmark_pro_monthly",
+          "introductoryOffer" : {
+            "internalID" : "wizmark_pro_monthly_trial",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1W"
+          },
+          "localizations" : [
+            {
+              "description" : "全機能開放・広告非表示・AI無制限",
+              "displayName" : "WizMark Pro",
+              "locale" : "ja"
+            },
+            {
+              "description" : "All features, AI extraction, ad-free, data export",
+              "displayName" : "WizMark Pro",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "wizmark_pro_monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Monthly",
+          "subscriptionGroupID" : "wizmark_pro_group",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "99.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "wizmark_pro_annual",
+          "introductoryOffer" : {
+            "internalID" : "wizmark_pro_annual_trial",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P1W"
+          },
+          "localizations" : [
+            {
+              "description" : "全機能開放・広告非表示・AI無制限（年間）",
+              "displayName" : "WizMark Pro 年間",
+              "locale" : "ja"
+            },
+            {
+              "description" : "All features, ad-free, AI unlimited",
+              "displayName" : "WizMark Pro Annual",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "wizmark_pro_annual",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Annual",
+          "subscriptionGroupID" : "wizmark_pro_group",
+          "type" : "RecurringSubscription",
+          "winbackOffers" : [
+
+          ]
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Build and test before anything reaches the remote.
+#
+# Only guards the default branch: a work-in-progress topic branch should be
+# cheap to push, and blocking that just teaches people to pass --no-verify.
+#
+# Skip with: SKIP_HOOKS=1 git push ...
+[[ "${SKIP_HOOKS:-0}" == "1" ]] && exit 0
+
+repo="$(git rev-parse --show-toplevel)"
+branch="$(git rev-parse --abbrev-ref HEAD)"
+
+if [[ "$branch" != "main" ]]; then
+    printf '  \033[2mpre-push: %s は対象外（main のみ検査）\033[0m\n' "$branch"
+    exit 0
+fi
+
+printf '\n\033[1mpre-push: main へ push する前の検査\033[0m\n'
+exec "$repo/scripts/preflight.sh" --quick

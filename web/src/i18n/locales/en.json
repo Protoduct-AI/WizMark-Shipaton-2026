@@ -1,0 +1,214 @@
+{
+  "meta": {
+    "title": "WizMark - Organize bookmarks smartly with AI",
+    "description": "WizMark is an iPhone/iPad bookmark app that uses AI to summarize and categorize the links you share, organizing everything from store info and events to recipes."
+  },
+  "nav": {
+    "legalLabel": "Legal",
+    "appLabel": "App",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "appStore": "App Store"
+  },
+  "hero": {
+    "line1": "Just one link,",
+    "line2": "and AI does the rest.",
+    "appStoreBadgeAlt": "Download on the App Store",
+    "screenshotHomeAlt": "WizMark home screen",
+    "screenshotDetailAlt": "WizMark bookmark detail"
+  },
+  "footer": {
+    "home": "Home",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "copyright": "© 2026 Protoduct AI. All rights reserved."
+  },
+  "lang": {
+    "en": "EN",
+    "ja": "JP"
+  },
+  "contact": {
+    "emailLabel": "Email"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "updated": "Last updated: June 26, 2026",
+    "sections": [
+      {
+        "heading": "1. Introduction",
+        "body": "Protoduct AI (\"we\") respects the privacy of everyone using WizMark (\"the App\") and is committed to protecting personal information. This Privacy Policy explains what information the App collects, how it is used, and your rights."
+      },
+      {
+        "heading": "2. Information We Collect",
+        "subsections": [
+          {
+            "heading": "2.1 Information You Provide",
+            "items": [
+              "Account information (email address) - via Clerk authentication",
+              "Bookmark data (URL, title, notes, tags)",
+              "Collection information (name, icon, color settings)"
+            ]
+          },
+          {
+            "heading": "2.2 Information Collected Automatically",
+            "items": [
+              "Usage data (via PostHog analytics) - feature usage frequency, screen transitions, etc.",
+              "Device identifiers (for AdMob ad delivery)",
+              "Crash reports (via Sentry)"
+            ]
+          },
+          {
+            "heading": "2.3 Information Processed by AI Features",
+            "items": [
+              "Web page content at a bookmark's URL (for summarization and information extraction)",
+              "Extracted information (store name, address, phone number, business hours, recipes, ratings, etc.)"
+            ],
+            "body": "AI features use the Google Gemini API. Data processed is handled in accordance with Google's Privacy Policy."
+          }
+        ]
+      },
+      {
+        "heading": "3. Purpose of Use",
+        "items": [
+          "Providing and improving the App's features",
+          "Providing user support",
+          "Displaying advertisements (for free users)",
+          "Analyzing App usage",
+          "Detecting and fixing bugs"
+        ]
+      },
+      {
+        "heading": "4. Sharing of Information",
+        "body": "We do not share your personal information with third parties except in the following cases:",
+        "items": [
+          "When you give consent",
+          "When required by law",
+          "Disclosure to service providers necessary to operate the App (Clerk, Google, PostHog, Sentry, RevenueCat)"
+        ]
+      },
+      {
+        "heading": "5. Data Storage",
+        "body": "Bookmark and collection data is synced across your devices through Apple iCloud. Data is encrypted and stored in accordance with Apple's security standards."
+      },
+      {
+        "heading": "6. Your Rights",
+        "items": [
+          "Account deletion: You can delete your account from the in-app settings",
+          "Data deletion: All related data is deleted when you delete your account",
+          "Ad tracking control: You can manage tracking permissions from iOS Settings"
+        ]
+      },
+      {
+        "heading": "7. Children's Privacy",
+        "body": "The App is not intended for children under 16. We do not knowingly collect personal information from children under 16."
+      },
+      {
+        "heading": "8. Changes to This Policy",
+        "body": "This Privacy Policy may be updated from time to time. Material changes will be notified within the App."
+      },
+      {
+        "heading": "9. Contact Us",
+        "body": "If you have any questions about privacy, please contact us at the following:"
+      }
+    ]
+  },
+  "terms": {
+    "title": "Terms of Use",
+    "updated": "Last updated: June 26, 2026",
+    "sections": [
+      {
+        "heading": "1. About These Terms",
+        "body": "These Terms of Use (\"these Terms\") set forth the conditions for using WizMark (\"the App\") provided by Protoduct AI (\"we\"). By using the App, you are deemed to agree to these Terms."
+      },
+      {
+        "heading": "2. Service Description",
+        "body": "WizMark is an iOS application that saves and organizes web page bookmarks and uses AI technology to automatically extract information."
+      },
+      {
+        "heading": "3. Account",
+        "items": [
+          "The basic features of the App can be used without registering an account",
+          "Some features require sign-in via Clerk",
+          "You are responsible for the accuracy and security of your account information"
+        ]
+      },
+      {
+        "heading": "4. Subscriptions and Billing",
+        "subsections": [
+          {
+            "heading": "4.1 WizMark Pro (Monthly Subscription)",
+            "items": [
+              "$9.99/month (tax included) unlocks all AI features, ad removal, and data export",
+              "Billed to the payment method linked to your Apple ID",
+              "Subscriptions auto-renew unless canceled at least 24 hours before the end of the period",
+              "Cancel from iOS Settings > Apple ID > Subscriptions"
+            ]
+          },
+          {
+            "heading": "4.2 Ad Removal (One-time Purchase)",
+            "items": [
+              "A one-time purchase of $6.99 permanently removes ads",
+              "Purchases are non-refundable (subject to Apple's policies)"
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "5. Prohibited Conduct",
+        "items": [
+          "Reverse engineering, modifying, or redistributing the App",
+          "Unauthorized access or interference with the service",
+          "Saving or sharing illegal content",
+          "Sending large volumes of requests via automated tools"
+        ]
+      },
+      {
+        "heading": "6. About AI Features",
+        "items": [
+          "Information extraction results from AI features are for reference only and accuracy is not guaranteed",
+          "Please verify important information yourself",
+          "AI processing uses the Google Gemini API"
+        ]
+      },
+      {
+        "heading": "7. Intellectual Property",
+        "body": "Intellectual property rights for the App's design, code, and content belong to us. Ownership of bookmark data you save belongs to you."
+      },
+      {
+        "heading": "8. Disclaimer",
+        "items": [
+          "The App is provided \"as is\"",
+          "We are not liable for service interruptions or data loss",
+          "We are not responsible for the content of third-party websites"
+        ]
+      },
+      {
+        "heading": "9. Changes or Termination of Service",
+        "body": "We reserve the right to change the App's features or terminate the service with prior notice."
+      },
+      {
+        "heading": "10. Governing Law",
+        "body": "These Terms are governed by the laws of Japan, and the courts of Japan shall have exclusive jurisdiction."
+      },
+      {
+        "heading": "11. Contact Us",
+        "body": "If you have any questions about these Terms, please contact us at the following:"
+      }
+    ]
+  },
+  "join": {
+    "loading": "Checking the invitation...",
+    "invitedBy": "{{name}} shared a collection with you",
+    "invitedGeneric": "A collection has been shared with you",
+    "bookmarkCount_one": "{{count}} bookmark",
+    "bookmarkCount_other": "{{count}} bookmarks",
+    "openInApp": "Open in the app to join",
+    "openInAppNote": "If the app does not open, install it below.",
+    "getApp": "Get WizMark on the App Store",
+    "afterInstall": "Install the app, then open this link again to join.",
+    "unavailableTitle": "This invitation is not available",
+    "unavailableBody": "Sharing may have been turned off, or the link may be incorrect. Check with whoever sent it.",
+    "errorTitle": "Could not load the invitation",
+    "errorBody": "Check your connection and try again."
+  }
+}

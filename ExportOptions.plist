@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>method</key>
+    <string>app-store-connect</string>
+    <key>teamID</key>
+    <string>UJTZMJ5D9Q</string>
+    <key>signingStyle</key>
+    <string>manual</string>
+    <key>signingCertificate</key>
+    <string>Apple Distribution: PROTODUCTAI K.K. (UJTZMJ5D9Q)</string>
+    <key>provisioningProfiles</key>
+    <dict>
+        <key>com.protoductai.wizmark</key>
+        <string>WizMark AppStore V2</string>
+        <key>com.protoductai.wizmark.share</key>
+        <string>WizMarkShare AppStore V2</string>
+    </dict>
+    <key>uploadSymbols</key>
+    <true/>
+    <key>manageAppVersionAndBuildNumber</key>
+    <false/>
+</dict>
+</plist>

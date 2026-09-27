@@ -1,0 +1,131 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main, codex/public-release]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Runs on Linux because it needs neither Xcode nor a simulator, so it reports
+  # in under a minute and does not consume the macOS minute multiplier.
+  convex:
+    name: Convex
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: 型チェック
+        run: pnpm exec tsc --noEmit -p convex/tsconfig.json
+      - name: セキュリティ回帰テスト
+        run: pnpm test:security
+
+      # ConvexMobile decodes a no-result mutation as String?, so a mutation the
+      # app ignores must return null or the client fails on a call the server
+      # already committed. Cheap to check, expensive to find in the wild.
+      - name: 戻り値の契約
+        run: |
+          python3 - <<'PY'
+          import pathlib, re, sys
+
+          # Every service against every convex module: scoping this to shares.ts is how
+          # the avatar save in users.ts shipped broken.
+          discarded = {}
+          for f in sorted(pathlib.Path('Sources').rglob('*.swift')):
+              for m in re.finditer(
+                      r'^[ \t]*try await client\.mutation\(\s*\n?\s*"(\w+):(\w+)"',
+                      f.read_text(), re.M):
+                  discarded.setdefault((m.group(1), m.group(2)), f)
+
+          bad, checked = [], []
+          for (module, name), _ in sorted(discarded.items()):
+              ts = pathlib.Path(f'convex/{module}.ts')
+              if not ts.exists():
+                  continue
+              ts_src = ts.read_text()
+              m = re.search(rf'export const {name} = mutation\(', ts_src)
+              if not m:
+                  continue
+              start = m.end()
+              nxt = ts_src.find('\nexport const', start)
+              fn = ts_src[start: nxt if nxt > 0 else len(ts_src)]
+              checked.append(f'{module}:{name}')
+              for r in re.findall(r'^\s*return (.+?);', fn, re.M):
+                  if not r.strip().startswith('null'):
+                      bad.append(f'{module}:{name} returns {r.strip()}')
+
+          if bad:
+              print('\n'.join(bad))
+              print('結果を読まない mutation は null を返してください')
+              sys.exit(1)
+          print('OK:', ', '.join(checked) or 'なし')
+          PY
+
+  web:
+    name: Web
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter web build
+
+  ios:
+    name: iOS
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Xcode を選択
+        run: sudo xcode-select -s /Applications/Xcode_26.3.app
+      - run: brew install xcodegen
+      - name: ローカル設定のテンプレートを準備
+        run: |
+          cp Config/Debug.xcconfig.template Config/Debug.xcconfig
+          cp Config/Release.xcconfig.template Config/Release.xcconfig
+      - run: xcodegen generate
+      - name: シミュレータを選択
+        id: simulator
+        run: |
+          device_id=$(xcrun simctl list devices available --json | python3 -c 'import json, sys; print(next(device["udid"] for devices in json.load(sys.stdin)["devices"].values() for device in devices if device["name"].startswith("iPhone")))')
+          echo "id=$device_id" >> "$GITHUB_OUTPUT"
+
+      # No signing here: a simulator build proves the code compiles without
+      # putting distribution certificates on a hosted runner.
+      # Run the standalone XCTest smoke test without launching configured services.
+      - name: ビルドとテスト
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project WizMark.xcodeproj -scheme WizMark \
+            -destination 'platform=iOS Simulator,id=${{ steps.simulator.outputs.id }}' \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO TEST_HOST='' BUNDLE_LOADER=''
+
+  secrets:
+    name: Secrets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 秘密情報の混入
+        run: |
+          if git grep -lIE '(sk_(live|test)_[0-9A-Za-z]{20,}|AIza[0-9A-Za-z_-]{30,}|AKIA[0-9A-Z]{16})' \
+               -- 'Sources/*' 'convex/*' '*.yml' '*.plist'; then
+            echo "秘密情報らしき文字列が含まれています"
+            exit 1
+          fi
+          echo "検出なし"

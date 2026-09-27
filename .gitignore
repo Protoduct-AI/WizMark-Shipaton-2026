@@ -1,0 +1,86 @@
+# Xcode
+*.xcodeproj
+*.xcworkspace
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+
+# Build artifacts
+DerivedData/
+build/
+.build/
+
+# Swift Package Manager
+.swiftpm/xcode/package.xcworkspace/
+.swiftpm/xcode/xcuserdata/
+Package.resolved
+
+# Signing
+*.mobileprovision
+*.p12
+*.cer
+*.p8
+*.pem
+*.key
+*.pfx
+*.jks
+*.keystore
+*.keychain
+*.keychain-db
+*.ipa
+*.xcarchive/
+*.xcresult/
+*.log
+
+# CocoaPods (not used but just in case)
+Pods/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# OS generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Environment / secrets
+.env
+.env.*
+*.xcconfig
+!*.xcconfig.template
+
+# Keep xcodegen spec
+!project.yml
+
+# Web
+node_modules/
+web/dist/
+web/.vite/
+*.local
+.turbo/
+
+# Convex
+.convex/
+
+# Playwright MCP artifacts
+.playwright-mcp/
+
+# Wrangler (Cloudflare)
+.wrangler/
+
+# Metadata / screenshots (uploaded separately)
+metadata/
