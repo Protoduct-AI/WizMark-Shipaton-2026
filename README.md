@@ -32,7 +32,7 @@ This is the public source snapshot prepared for RevenueCat Shipaton 2026, includ
 
 ## Requirements
 
-- macOS with Xcode 26.3 or later and an iOS Simulator (iOS deployment target: 17.0).
+- An Apple Silicon Mac with Xcode 26.3 or later and an iOS Simulator (iOS deployment target: 17.0).
 - [XcodeGen](https://github.com/yonaskolb/XcodeGen).
 - Node.js 22.12 or later and pnpm 10.33.0.
 - Your own Convex, Clerk, and RevenueCat projects for connected features.
